@@ -81,10 +81,12 @@ h1 svg {
   white-space: nowrap;
 }
 
-/* En móviles estrechos (360–400 px) el subtítulo se aprieta para que quepa el marcador. */
+/* En móviles estrechos (360–400 px) el subtítulo se aprieta para que quepa el marcador y,
+   si aun así no cabe (número o racha de tres cifras), pasa a dos líneas. */
 @media (max-width: 400px) {
   .subtitulo {
     letter-spacing: 0.14em;
+    white-space: normal;
   }
 }
 
@@ -92,6 +94,7 @@ h1 svg {
 .marcador {
   display: flex;
   align-items: center;
+  flex: none;
   gap: 0.4rem;
   margin-left: auto;
 }
