@@ -1,0 +1,504 @@
+:root {
+  --fondo: #f4ecdd;
+  --superficie: #fbf6ec;
+  --tinta: #1f2a37;
+  --tenue: #6b6254;
+  --linea: #ddd0b8;
+  --acento: #4fb3bf;
+  --acento-trazo: #2f8f9b;
+  --sobre-acento: #151515;
+  --bien: #3d7a4f;
+  --mal: #b23b3b;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #16202c;
+    --superficie: #1e2a38;
+    --tinta: #efe6d6;
+    --tenue: #a89f8f;
+    --linea: #33414f;
+    --acento-trazo: #4fb3bf;
+    --bien: #5fae76;
+    --mal: #e06666;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+main {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem max(2rem, env(safe-area-inset-bottom));
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+.logo {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+h1 {
+  margin: 0;
+  line-height: 0;
+}
+
+/* «Periplo» en Source Serif 4 cursiva, vectorizado (src/marca.svg) para no depender de la fuente. */
+h1 svg {
+  height: 1.45rem;
+  width: auto;
+}
+
+.subtitulo {
+  margin: 0.3rem 0 0;
+  color: var(--tenue);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.numero {
+  margin-left: auto;
+  color: var(--tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.racha {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Progreso del día: un punto por palabra. */
+.progreso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  color: var(--tenue);
+  font-size: 0.8rem;
+}
+
+.progreso ol {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.progreso li {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 2px solid var(--linea);
+}
+
+.progreso li.actual {
+  border-color: var(--acento-trazo);
+}
+
+.progreso li.bien {
+  border-color: var(--bien);
+  background: var(--bien);
+}
+
+.progreso li.mal {
+  border-color: var(--mal);
+  background: var(--mal);
+}
+
+.reto {
+  text-align: center;
+  padding: 1.5rem 0 1rem;
+}
+
+.pregunta {
+  margin: 0;
+  color: var(--tenue);
+}
+
+.palabra {
+  margin: 0.5rem 0 2rem;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 13vw, 3.6rem);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+.opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.opcion {
+  min-height: 3.5rem;
+  padding: 0.75rem;
+  border: 1.5px solid var(--linea);
+  border-radius: 0.8rem;
+  background: var(--superficie);
+  color: var(--tinta);
+  font: 600 1.05rem var(--sans);
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    border-color 0.15s,
+    opacity 0.3s;
+}
+
+.opcion:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) {
+  .opcion:not(:disabled):hover {
+    border-color: var(--acento-trazo);
+  }
+}
+
+.opcion:disabled {
+  cursor: default;
+}
+
+.opcion.correcta {
+  border-color: var(--bien);
+  background: var(--bien);
+  color: #fff;
+}
+
+.opcion.fallada {
+  border-color: var(--mal);
+  background: var(--mal);
+  color: #fff;
+}
+
+.opcion.apagada {
+  opacity: 0.4;
+}
+
+.pista {
+  max-width: 22rem;
+  min-height: 1.2em;
+  margin: 1.25rem auto 0;
+  color: var(--tenue);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.revelacion {
+  scroll-margin-top: 1rem;
+  animation: aparecer 0.4s ease-out;
+}
+
+.veredicto {
+  margin: 0 0 1.25rem;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.veredicto.bien {
+  color: var(--bien);
+}
+
+.veredicto.mal {
+  color: var(--mal);
+}
+
+/* La cadena etimológica: un viaje de parada en parada. */
+.cadena {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cadena li {
+  position: relative;
+  padding: 0 0 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.cadena li::before {
+  content: '';
+  position: absolute;
+  left: 0.3rem;
+  top: 0.3rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 2px solid var(--acento-trazo);
+  background: var(--fondo);
+}
+
+.cadena li:first-child::before {
+  background: var(--acento-trazo);
+}
+
+.cadena li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0.72rem;
+  top: 1.2rem;
+  bottom: 0.1rem;
+  border-left: 2px dotted var(--linea);
+}
+
+.cadena li.destino {
+  padding-bottom: 0;
+}
+
+.cadena li.destino::before {
+  border-color: var(--tinta);
+}
+
+.lengua {
+  color: var(--tenue);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.forma {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+}
+
+.significado {
+  color: var(--tenue);
+  font-style: italic;
+}
+
+.nota {
+  margin: 1.5rem 0 0;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid var(--acento-trazo);
+  background: var(--superficie);
+  border-radius: 0 0.5rem 0.5rem 0;
+  line-height: 1.45;
+}
+
+/* Resumen del día: las palabras jugadas, desplegables para repasar su viaje. */
+.resumen {
+  padding-top: 1.5rem;
+  animation: aparecer 0.4s ease-out;
+}
+
+.lista-resumen {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-resumen > li {
+  border-bottom: 1px solid var(--linea);
+}
+
+.lista-resumen summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.9rem 0.25rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.lista-resumen summary::-webkit-details-marker {
+  display: none;
+}
+
+.lista-resumen summary::after {
+  content: '▸';
+  color: var(--tenue);
+  transition: transform 0.2s;
+}
+
+.lista-resumen details[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.lista-resumen details[open] {
+  padding-bottom: 1.25rem;
+}
+
+.marca-resultado {
+  font-weight: 700;
+}
+
+.marca-resultado.bien {
+  color: var(--bien);
+}
+
+.marca-resultado.mal {
+  color: var(--mal);
+}
+
+.palabra-resumen {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+.origen-resumen {
+  margin-left: auto;
+  color: var(--tenue);
+  font-size: 0.85rem;
+}
+
+.ayuda {
+  margin: 0.75rem 0 0;
+  color: var(--tenue);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+  text-align: center;
+}
+
+.estadisticas strong {
+  display: block;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.estadisticas span {
+  color: var(--tenue);
+  font-size: 0.75rem;
+}
+
+.pie {
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.boton {
+  width: 100%;
+  min-height: 3.25rem;
+  border: 0;
+  border-radius: 0.8rem;
+  background: var(--acento);
+  color: var(--sobre-acento);
+  font: 600 1.05rem var(--sans);
+  cursor: pointer;
+}
+
+.siguiente {
+  color: var(--tenue);
+}
+
+.siguiente time {
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta);
+  font-weight: 600;
+}
+
+.creditos {
+  margin: 1.5rem 0 0;
+  color: var(--tenue);
+  font-size: 0.7rem;
+}
+
+.creditos a {
+  color: inherit;
+}
+
+#portada {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: var(--fondo);
+  transition:
+    opacity 0.4s,
+    visibility 0.4s;
+}
+
+#portada svg {
+  width: 7rem;
+  height: 7rem;
+  animation: asomar 0.5s ease-out;
+}
+
+#portada.oculta {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes asomar {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+#aviso {
+  position: fixed;
+  left: 50%;
+  top: 1rem;
+  transform: translate(-50%, -150%);
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--tinta);
+  color: var(--fondo);
+  font-weight: 600;
+  visibility: hidden;
+  transition:
+    transform 0.25s,
+    visibility 0.25s;
+}
+
+#aviso.visible {
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
