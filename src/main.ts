@@ -55,6 +55,13 @@ if (/^(localhost|127\.|10\.|192\.168\.)/.test(location.hostname) && new URLSearc
 
 const app = document.getElementById('app')!
 const aviso = document.getElementById('aviso')!
+const reglas = document.getElementById('reglas') as HTMLDialogElement
+
+// Las reglas se cierran con sus botones, con Escape (nativo del diálogo) o tocando fuera.
+reglas.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => reglas.close()))
+reglas.addEventListener('click', (e) => {
+  if (e.target === reglas) reglas.close()
+})
 let guardado = cargar()
 let diaMostrado = 0
 /** Palabra en pantalla (0, 1, 2) o PALABRAS_POR_DIA para el resumen del día. */
@@ -82,6 +89,7 @@ function render() {
       </div>
       <span class="numero">#${dia}</span>
       <span class="racha" title="Días seguidos completados">🔥 ${rachaVigente(guardado.estadisticas, dia)}</span>
+      <button id="ayuda" class="ayuda" type="button" aria-label="Cómo se juega">?</button>
     </header>
 
     ${progreso(palabras, elecciones)}
@@ -97,6 +105,7 @@ function render() {
     scrollTo({ top: 0, behavior: 'smooth' })
   })
   app.querySelector('#compartir')?.addEventListener('click', () => compartir(dia, resultados(palabras, elecciones)))
+  app.querySelector('#ayuda')?.addEventListener('click', () => reglas.showModal())
 }
 
 function eleccionesDe(dia: number): Lengua[] {

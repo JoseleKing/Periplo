@@ -17,6 +17,21 @@
   <body>
     <div id="portada" aria-hidden="true"><!-- logo --></div>
     <main id="app"></main>
+    <dialog id="reglas" aria-labelledby="reglas-titulo">
+      <button class="cerrar" type="button" aria-label="Cerrar">×</button>
+      <h2 id="reglas-titulo">Cómo se juega</h2>
+      <ul>
+        <li>Cada día hay <strong>tres palabras nuevas</strong>, las mismas para todos. Cambian a medianoche.</li>
+        <li>
+          Elige la lengua de la que procede cada una <strong>en último término</strong>: la más antigua de su viaje,
+          no una parada intermedia. Si una palabra pasó por el latín pero venía del griego, la respuesta es griego.
+        </li>
+        <li>Tienes <strong>un solo intento</strong> por palabra. Al responder, descubrirás el viaje completo de la palabra hasta el español.</li>
+        <li>La <strong>racha 🔥</strong> cuenta los días seguidos en que juegas las tres palabras, aciertes o no.</li>
+        <li>Al terminar, <strong>comparte tu resultado</strong>: solo muestra aciertos y fallos, sin desvelar las respuestas.</li>
+      </ul>
+      <button class="boton" type="button">Entendido</button>
+    </dialog>
     <div id="aviso" role="status" aria-live="polite"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

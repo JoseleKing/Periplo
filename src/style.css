@@ -92,6 +92,70 @@ h1 svg {
   font-variant-numeric: tabular-nums;
 }
 
+.ayuda {
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1.5px solid var(--linea);
+  border-radius: 50%;
+  background: var(--superficie);
+  color: var(--tinta);
+  font: 700 1rem var(--sans);
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .ayuda:hover {
+    border-color: var(--acento-trazo);
+  }
+}
+
+/* Reglas del juego (diálogo modal). */
+#reglas {
+  width: min(26rem, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  padding: 1.5rem 1.25rem 1.25rem;
+  border: 0;
+  border-radius: 1rem;
+  background: var(--fondo);
+  color: var(--tinta);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 0.25);
+}
+
+#reglas::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+#reglas h2 {
+  margin: 0 0 1rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+}
+
+#reglas ul {
+  margin: 0 0 1.5rem;
+  padding-left: 1.1rem;
+  line-height: 1.5;
+}
+
+#reglas li + li {
+  margin-top: 0.6rem;
+}
+
+#reglas .cerrar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: none;
+  color: var(--tenue);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 /* Progreso del día: un punto por palabra. */
 .progreso {
   display: flex;
