@@ -81,14 +81,29 @@ h1 svg {
   white-space: nowrap;
 }
 
-.numero {
+/* En móviles estrechos (360–400 px) el subtítulo se aprieta para que quepa el marcador. */
+@media (max-width: 400px) {
+  .subtitulo {
+    letter-spacing: 0.14em;
+  }
+}
+
+/* Número del día, racha y ayuda: siempre en una sola fila, pegados a la derecha. */
+.marcador {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   margin-left: auto;
+}
+
+.numero {
   color: var(--tenue);
   font-variant-numeric: tabular-nums;
 }
 
 .racha {
   font-weight: 600;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 

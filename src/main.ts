@@ -87,9 +87,11 @@ function render() {
         <h1>${marca}</h1>
         <p class="subtitulo">Palabras con pasaporte</p>
       </div>
-      <span class="numero">#${dia}</span>
-      <span class="racha" title="Días seguidos completados">🔥 ${rachaVigente(guardado.estadisticas, dia)}</span>
-      <button id="ayuda" class="boton-ayuda" type="button" aria-label="Cómo se juega">?</button>
+      <div class="marcador">
+        <span class="numero">#${dia}</span>
+        <span class="racha" title="Días seguidos completados">🔥 ${rachaVigente(guardado.estadisticas, dia)}</span>
+        <button id="ayuda" class="boton-ayuda" type="button" aria-label="Cómo se juega">?</button>
+      </div>
     </header>
 
     ${progreso(palabras, elecciones)}
