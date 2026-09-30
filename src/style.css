@@ -92,7 +92,7 @@ h1 svg {
   font-variant-numeric: tabular-nums;
 }
 
-.ayuda {
+.boton-ayuda {
   flex: none;
   width: 1.9rem;
   height: 1.9rem;
@@ -105,7 +105,7 @@ h1 svg {
 }
 
 @media (hover: hover) {
-  .ayuda:hover {
+  .boton-ayuda:hover {
     border-color: var(--acento-trazo);
   }
 }

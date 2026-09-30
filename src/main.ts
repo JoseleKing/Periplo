@@ -89,7 +89,7 @@ function render() {
       </div>
       <span class="numero">#${dia}</span>
       <span class="racha" title="Días seguidos completados">🔥 ${rachaVigente(guardado.estadisticas, dia)}</span>
-      <button id="ayuda" class="ayuda" type="button" aria-label="Cómo se juega">?</button>
+      <button id="ayuda" class="boton-ayuda" type="button" aria-label="Cómo se juega">?</button>
     </header>
 
     ${progreso(palabras, elecciones)}
