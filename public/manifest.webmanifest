@@ -1,7 +1,7 @@
 {
   "name": "Periplo",
   "short_name": "Periplo",
-  "description": "Una palabra al día: adivina de qué lengua procede.",
+  "description": "Tres palabras al día: adivina de qué lengua proceden.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",
