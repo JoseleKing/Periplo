@@ -8,7 +8,7 @@ function serviceWorker(): Plugin {
     name: 'periplo-sw',
     apply: 'build',
     generateBundle(_, bundle) {
-      const publicos = ['manifest.webmanifest', ...readdirSync('public/icons').map((f) => `icons/${f}`)]
+      const publicos = ['manifest.webmanifest', 'volver-almanaque.js', ...readdirSync('public/icons').map((f) => `icons/${f}`)]
       const ficheros = ['./', ...Object.keys(bundle).filter((f) => f !== 'index.html'), ...publicos]
       const version = createHash('sha256').update(ficheros.join()).digest('hex').slice(0, 10)
       const fuente = readFileSync('sw.js', 'utf8')
