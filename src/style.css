@@ -1,5 +1,5 @@
 :root {
-  --fondo: #f4ecdd;
+  --fondo: #f3e9d2;
   --superficie: #fbf6ec;
   --tinta: #1f2a37;
   --tenue: #6b6254;
@@ -58,6 +58,8 @@ header {
   flex: none;
   width: 2.5rem;
   height: 2.5rem;
+  /* drop-shadow sigue las esquinas redondeadas del icono; sin ella se funde con el fondo. */
+  filter: drop-shadow(0 1px 3px rgb(60 40 20 / 0.22));
 }
 
 h1 {
@@ -518,36 +520,6 @@ h1 svg {
 
 .creditos a {
   color: inherit;
-}
-
-#portada {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: grid;
-  place-items: center;
-  background: var(--fondo);
-  transition:
-    opacity 0.4s,
-    visibility 0.4s;
-}
-
-#portada svg {
-  width: 7rem;
-  height: 7rem;
-  animation: asomar 0.5s ease-out;
-}
-
-#portada.oculta {
-  opacity: 0;
-  visibility: hidden;
-}
-
-@keyframes asomar {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
 }
 
 #aviso {

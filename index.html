@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Periplo</title>
     <meta name="description" content="Tres palabras al día: adivina de qué lengua proceden." />
-    <meta name="theme-color" content="#f4ecdd" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#f3e9d2" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#16202c" media="(prefers-color-scheme: dark)" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
@@ -13,6 +13,46 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Periplo" />
+    <!-- Estilos de la portada en línea: así se pinta bien antes de que cargue style.css
+         (en desarrollo Vite lo inyecta desde JS y el logo salía un instante a todo lo ancho).
+         Los colores repiten --fondo de style.css porque aún no existe. -->
+    <style>
+      #portada {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: grid;
+        place-items: center;
+        background: #f3e9d2;
+        transition:
+          opacity 0.4s,
+          visibility 0.4s;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        #portada {
+          background: #16202c;
+        }
+      }
+
+      #portada svg {
+        width: 7rem;
+        height: 7rem;
+        animation: asomar 0.5s ease-out;
+      }
+
+      #portada.oculta {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      @keyframes asomar {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="portada" aria-hidden="true"><!-- logo --></div>
