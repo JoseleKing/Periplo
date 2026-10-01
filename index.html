@@ -15,15 +15,18 @@
     <meta name="apple-mobile-web-app-title" content="Periplo" />
     <!-- Estilos de la portada en línea: así se pinta bien antes de que cargue style.css
          (en desarrollo Vite lo inyecta desde JS y el logo salía un instante a todo lo ancho).
-         Los colores repiten --fondo de style.css porque aún no existe. -->
+         Los colores repiten --fondo y --tinta de style.css porque aún no existe. -->
     <style>
       #portada {
         position: fixed;
         inset: 0;
         z-index: 10;
         display: grid;
-        place-items: center;
+        place-content: center;
+        justify-items: center;
+        gap: 1rem;
         background: #f3e9d2;
+        color: #1f2a37;
         transition:
           opacity 0.4s,
           visibility 0.4s;
@@ -32,6 +35,7 @@
       @media (prefers-color-scheme: dark) {
         #portada {
           background: #16202c;
+          color: #efe6d6;
         }
       }
 
@@ -39,6 +43,12 @@
         width: 7rem;
         height: 7rem;
         animation: asomar 0.5s ease-out;
+      }
+
+      /* El nombre, con la misma marca vectorizada que la cabecera del juego. */
+      #portada svg:last-child {
+        width: auto;
+        height: 2rem;
       }
 
       #portada.oculta {
@@ -55,7 +65,7 @@
     </style>
   </head>
   <body>
-    <div id="portada" aria-hidden="true"><!-- logo --></div>
+    <div id="portada" aria-hidden="true"><!-- logo --><!-- marca --></div>
     <main id="app"></main>
     <dialog id="reglas" aria-labelledby="reglas-titulo">
       <button class="cerrar" type="button" aria-label="Cerrar">×</button>

@@ -19,11 +19,14 @@ function serviceWorker(): Plugin {
   }
 }
 
-/** Inserta el logo en la portada del HTML para que se vea antes de que cargue el JavaScript. */
+/** Inserta el logo y el nombre en la portada del HTML para que se vean antes de que cargue el JavaScript. */
 function portada(): Plugin {
   return {
     name: 'periplo-portada',
-    transformIndexHtml: (html) => html.replace('<!-- logo -->', readFileSync('assets/logo.svg', 'utf8').trim()),
+    transformIndexHtml: (html) =>
+      html
+        .replace('<!-- logo -->', readFileSync('assets/logo.svg', 'utf8').trim())
+        .replace('<!-- marca -->', readFileSync('src/marca.svg', 'utf8').trim()),
   }
 }
 
