@@ -79,6 +79,7 @@ function render() {
   }
   const palabras = palabrasDelDia(dia, PALABRAS)
   const elecciones = eleccionesDe(dia)
+  if (elecciones.length === PALABRAS_POR_DIA) avisarAlmanaque()
 
   app.innerHTML = `
     <header>
@@ -108,6 +109,11 @@ function render() {
   })
   app.querySelector('#compartir')?.addEventListener('click', () => compartir(dia, resultados(palabras, elecciones)))
   app.querySelector('#ayuda')?.addEventListener('click', () => reglas.showModal())
+}
+
+/** Con las palabras de hoy ya jugadas, la mano ☜ marca Periplo como «Hecho» en Almanaque. */
+function avisarAlmanaque() {
+  ;(window as Window & { almanaqueHecho?: () => void }).almanaqueHecho?.()
 }
 
 function eleccionesDe(dia: number): Lengua[] {
