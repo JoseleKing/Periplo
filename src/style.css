@@ -502,6 +502,17 @@ h1 svg {
   cursor: pointer;
 }
 
+.boton-almanaque {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.6rem;
+  border: 1.5px solid var(--acento);
+  background: transparent;
+  color: var(--acento);
+  text-decoration: none;
+}
+
 .siguiente {
   color: var(--tenue);
 }
