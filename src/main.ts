@@ -122,11 +122,17 @@ interface ResultadoAlmanaque {
  * y su hoja muestra los aciertos del día y la racha.
  */
 function avisarAlmanaque(dia: number, aciertos: boolean[]) {
-  ;(window as Window & { almanaqueHecho?: (r: ResultadoAlmanaque) => void }).almanaqueHecho?.({
-    aciertos: aciertos.filter(Boolean).length,
-    total: aciertos.length,
-    racha: rachaVigente(guardado.estadisticas, dia),
-  })
+  const w = window as Window & { almanaqueHecho?: (r: ResultadoAlmanaque) => void }
+  const avisar = () =>
+    w.almanaqueHecho?.({
+      aciertos: aciertos.filter(Boolean).length,
+      total: aciertos.length,
+      racha: rachaVigente(guardado.estadisticas, dia),
+    })
+  // Vite pone este módulo antes que volver-almanaque.js: en la primera pintada el script aún
+  // no ha corrido, pero lo hace antes de DOMContentLoaded.
+  if (w.almanaqueHecho) avisar()
+  else document.addEventListener('DOMContentLoaded', avisar, { once: true })
 }
 
 function eleccionesDe(dia: number): Lengua[] {

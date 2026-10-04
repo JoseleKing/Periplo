@@ -7,7 +7,8 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(CACHE)
-      .then((cache) => cache.addAll(PRECACHE))
+      // cache: 'reload' salta la caché HTTP del navegador, que podría guardar aún la versión anterior.
+      .then((cache) => cache.addAll(PRECACHE.map((f) => new Request(f, { cache: 'reload' }))))
       .then(() => self.skipWaiting()),
   )
 })
