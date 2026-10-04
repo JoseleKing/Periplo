@@ -79,7 +79,7 @@ function render() {
   }
   const palabras = palabrasDelDia(dia, PALABRAS)
   const elecciones = eleccionesDe(dia)
-  if (elecciones.length === PALABRAS_POR_DIA) avisarAlmanaque()
+  if (elecciones.length === PALABRAS_POR_DIA) avisarAlmanaque(dia, resultados(palabras, elecciones))
 
   app.innerHTML = `
     <header>
@@ -111,9 +111,22 @@ function render() {
   app.querySelector('#ayuda')?.addEventListener('click', () => reglas.showModal())
 }
 
-/** Con las palabras de hoy ya jugadas, la mano ☜ marca Periplo como «Hecho» en Almanaque. */
-function avisarAlmanaque() {
-  ;(window as Window & { almanaqueHecho?: () => void }).almanaqueHecho?.()
+interface ResultadoAlmanaque {
+  aciertos: number
+  total: number
+  racha: number
+}
+
+/**
+ * Con las palabras de hoy ya jugadas, la mano ☜ marca Periplo como «Hecho» en Almanaque,
+ * y su hoja muestra los aciertos del día y la racha.
+ */
+function avisarAlmanaque(dia: number, aciertos: boolean[]) {
+  ;(window as Window & { almanaqueHecho?: (r: ResultadoAlmanaque) => void }).almanaqueHecho?.({
+    aciertos: aciertos.filter(Boolean).length,
+    total: aciertos.length,
+    racha: rachaVigente(guardado.estadisticas, dia),
+  })
 }
 
 function eleccionesDe(dia: number): Lengua[] {
