@@ -124,7 +124,9 @@ export function rachaVigente(e: Estadisticas, hoy: number): number {
   return e.ultimoDiaCompletado >= hoy - 1 ? e.racha : 0
 }
 
-export function textoCompartir(numero: number, resultados: boolean[], racha: number, url: string): string {
-  const casillas = resultados.map((r) => (r ? '🟩' : '🟥')).join('')
-  return [`Periplo #${numero} ${casillas}`, `🔥 Racha: ${racha}`, url].join('\n')
+/** Una marca por palabra: ▰ acertada, ▱ fallada. «Periplo nº 7 ▰▱▰ 2/3 aciertos» y el enlace. */
+export function textoCompartir(numero: number, resultados: boolean[]): string {
+  const marcas = resultados.map((r) => (r ? '▰' : '▱')).join('')
+  const aciertos = resultados.filter(Boolean).length
+  return `Periplo nº ${numero} ${marcas} ${aciertos}/${resultados.length} aciertos\njoseleking.github.io/Periplo`
 }

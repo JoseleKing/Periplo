@@ -274,8 +274,7 @@ function responder(dia: number, indice: number, eleccion: Lengua) {
 }
 
 async function compartir(dia: number, aciertos: boolean[]) {
-  const url = location.origin + location.pathname
-  const texto = textoCompartir(dia, aciertos, rachaVigente(guardado.estadisticas, dia), url)
+  const texto = textoCompartir(dia, aciertos)
   try {
     if (navigator.share) {
       await navigator.share({ text: texto })
