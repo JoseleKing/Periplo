@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Periplo</title>
     <meta name="description" content="Tres palabras al día: adivina de qué lengua proceden." />
-    <meta name="theme-color" content="#f3e9d2" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#16202c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3e9d2" />
+    <script>
+      // Modo claro u oscuro: el que se elija en Almanaque, común a todos los juegos. Sin elegir, claro.
+      try {
+        if (localStorage.getItem('almanaque:tema') === 'dark') {
+          document.documentElement.dataset.theme = 'dark';
+          document.querySelector('meta[name="theme-color"]').content = '#16202c';
+        }
+      } catch (e) {}
+    </script>
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
@@ -32,11 +40,9 @@
           visibility 0.4s;
       }
 
-      @media (prefers-color-scheme: dark) {
-        #portada {
-          background: #16202c;
-          color: #efe6d6;
-        }
+      [data-theme="dark"] #portada {
+        background: #16202c;
+        color: #efe6d6;
       }
 
       #portada svg {

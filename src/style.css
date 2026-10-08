@@ -11,20 +11,19 @@
   --mal: #b23b3b;
   --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fondo: #16202c;
-    --superficie: #1e2a38;
-    --tinta: #efe6d6;
-    --tenue: #a89f8f;
-    --linea: #33414f;
-    --acento-trazo: #4fb3bf;
-    --bien: #5fae76;
-    --mal: #e06666;
-  }
+:root[data-theme="dark"] {
+  --fondo: #16202c;
+  --superficie: #1e2a38;
+  --tinta: #efe6d6;
+  --tenue: #a89f8f;
+  --linea: #33414f;
+  --acento-trazo: #4fb3bf;
+  --bien: #5fae76;
+  --mal: #e06666;
+  color-scheme: dark;
 }
 
 * {
