@@ -311,18 +311,23 @@ setInterval(() => {
 render()
 retirarPortada()
 
-/** La portada con el icono se ve al menos PORTADA_MS desde que se abre la app y luego se desvanece. */
+/**
+ * La portada con el icono se ve al menos PORTADA_MS desde que se abre la app y luego se desvanece.
+ * Si tarda en pintarse (la primera visita), se queda al menos PINTADA_MS desde entonces.
+ */
 function retirarPortada() {
   const PORTADA_MS = 1500
+  const PINTADA_MS = 1400
   const FUNDIDO_MS = 500
   const portada = document.getElementById('portada')
   if (!portada) return
+  const pintada = performance.getEntriesByName('first-contentful-paint')[0]?.startTime ?? performance.now()
   setTimeout(
     () => {
       portada.classList.add('oculta')
       setTimeout(() => portada.remove(), FUNDIDO_MS)
     },
-    Math.max(0, PORTADA_MS - performance.now()),
+    Math.max(0, PORTADA_MS - performance.now(), PINTADA_MS - (performance.now() - pintada)),
   )
 }
 
