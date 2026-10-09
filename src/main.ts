@@ -313,8 +313,8 @@ retirarPortada()
 
 /** La portada con el icono se ve al menos PORTADA_MS desde que se abre la app y luego se desvanece. */
 function retirarPortada() {
-  const PORTADA_MS = 900
-  const FUNDIDO_MS = 400
+  const PORTADA_MS = 1500
+  const FUNDIDO_MS = 500
   const portada = document.getElementById('portada')
   if (!portada) return
   setTimeout(
