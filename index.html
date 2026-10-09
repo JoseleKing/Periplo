@@ -68,6 +68,18 @@
         height: 2rem;
       }
 
+      /* Las olas bajo la P (último trazo del logo) ondean mientras se ve la portada. */
+      #portada svg:first-child path:last-child {
+        animation: ondear 0.6s ease-in-out infinite alternate;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #portada svg,
+        #portada svg:first-child path:last-child {
+          animation: none;
+        }
+      }
+
       #portada.oculta {
         opacity: 0;
         visibility: hidden;
@@ -77,6 +89,16 @@
         from {
           opacity: 0;
           transform: scale(0.9);
+        }
+      }
+
+      /* Medio desplazamiento de cresta y un leve vaivén vertical (unidades del viewBox de 200). */
+      @keyframes ondear {
+        from {
+          transform: translate(-9px, 2px);
+        }
+        to {
+          transform: translate(9px, -2px);
         }
       }
     </style>
